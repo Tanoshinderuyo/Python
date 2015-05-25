@@ -9,6 +9,7 @@ Der Kalender entstand aus der Motivation, eine schöne, erste Oberfläche mit Py
 
 
 ###Ziele:
+* import calfunctions.ipynb nach calendar.ipynb
 * Verschönerung der Shellausgabe
 * Speicherung des gesamten Kalenders als String in eine Datei
 * farbige Markierung der Feiertage sowie Ausgabe in extra Liste
