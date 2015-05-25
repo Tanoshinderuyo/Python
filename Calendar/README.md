@@ -23,4 +23,11 @@ Sortieralgorithmus:
 <pre>
 &nbsp
 </pre>
-<a href="http://daringfireball.net/projects/markdown/syntax">Tipp zu Markdown-Syntax</a>
+###Links und Ähnliches
+* <a href="http://daringfireball.net/projects/markdown/syntax">Tipp zu Markdown-Syntax</a>
+* <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet#html"> Markdown Cheat-Sheet </a>
+* <a href="http://www.python-kurs.eu/tkinter_sliders.php"> Slider und andere einführende Tkinter Erklärungen </a>
+* <a href="http://ipython.org/ipython-doc/1/interactive/nbconvert.html">Convert iPython Files </a>
+* <a href="http://pymotw.com/2/subprocess/index.html#module-subprocess"> Running external Commands with Python </a>
+* <a href="http://ipython.org/ipython-doc/1/config/overview.html"> Configurate an iPython-System</a>
+* <a href="https://docs.python.org/2/tutorial/appetite.html"> *The Holy iPython Documentation* </a>
