@@ -250,6 +250,29 @@ def get_menu_choice():
 	return choice
 	
 
+def existant_input():
+	option_valid = False
+	while not option_valid:
+		try:
+			inputty = (input())
+			count = 0
+			punktcount = 0
+			for char in inputty:
+				if (ord(char) in [46,48,49,50,51,52,53,54,55,56,57]):
+					if (ord(char)==46):
+						punktcount += 1
+					count += 1
+				else:
+					print("Bitte ein gültiges Datum eingeben")
+			if (punktcount == 2 and (ord(inputty[(len(inputty)-1)])!= 46) and count == len(inputty) and Existenz(inputty)==True):
+				option_valid = True
+			else:
+				raise ValueError
+		except ValueError:
+			print("Bitte ein gültiges Datum eingeben")
+	return inputty
+	
+
 def manage_date():
 	print("DatumOperationen - Testprogramm")
 	print()
@@ -259,8 +282,10 @@ def manage_date():
 		option = get_menu_choice()
 		print()
 		if option == 1:
-			a = input("Geben Sie Datum a ein: ")
-			b = input("Geben Sie Datum b ein: ")
+			print("Geben Sie Datum a ein: ")
+			a = existant_input()
+			print("Geben Sie Datum b ein: ")
+			b = existant_input()
 			print(Abstand(a,b),"\n")
 		elif option == 2:
 			a = input("Geben Sie ein Datum ein: ")
