@@ -258,10 +258,13 @@ def manage_crop(crop):
 		option = get_menu_choice()
 		print()
 		if option == 1:
-			manual_grow(crop)
+			a = input("Geben Sie Datum a ein: ")
+			b = input("Geben Sie Datum b ein: ")
+			Abstand(a,b)
 			print()
 		elif option == 2:
-			auto_grow(crop, 30)
+			a = input("Geben Sie ein Datum ein: ")
+			Existenz(a)
 			print()
 		elif option == 3:
 			print(crop.report())
