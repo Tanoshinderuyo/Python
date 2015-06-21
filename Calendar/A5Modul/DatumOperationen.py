@@ -13,7 +13,7 @@ def dateToStr(datum):
 	return a
 	
 
-#FUNKTIONIERT NOCH NICHT
+
 def Abstand(a, b):
 	datum1=toDate(a)
 	datum2=toDate(b)
@@ -214,7 +214,8 @@ def Ostersonntag(jahr):
 		#result=[[4,(os-31),'Ostersonntag']]
 		ostern[0]=os-31
 		ostern[1]=4
-	#//Datum
+	return ostern
+	#Datum
 	
 #TESTUMGEBUNG=========================================================================#
 def display_menu():
@@ -249,7 +250,7 @@ def get_menu_choice():
 	return choice
 	
 
-def manage_crop(crop):
+def manage_date():
 	print("DatumOperationen - Testprogramm")
 	print()
 	noexit = True
@@ -260,15 +261,44 @@ def manage_crop(crop):
 		if option == 1:
 			a = input("Geben Sie Datum a ein: ")
 			b = input("Geben Sie Datum b ein: ")
-			Abstand(a,b)
-			print()
+			print(Abstand(a,b),"\n")
 		elif option == 2:
 			a = input("Geben Sie ein Datum ein: ")
-			Existenz(a)
-			print()
+			print(Existenz(a),"\n")
 		elif option == 3:
-			print(crop.report())
-			print()
+			a = input("Geben Sie ein Datum a ein: ")
+			b = input("Geben Sie ein Datum b ein: ")
+			print(IstGleich(a,b),"\n")
+		elif option == 4:
+			a = input("Geben Sie ein Datum a ein: ")
+			b = input("Geben Sie ein Datum b ein: ")
+			print(LiegtVor(a,b),"\n")
+		elif option == 5:
+			a = input("Geben Sie ein Datum ein: ")
+			print(dateToStr(Vorgaenger(a)),"\n")
+		elif option == 6:
+			a = input("Geben Sie ein Datum ein: ")
+			print(dateToStr(Nachfolger(a)),"\n")
+		elif option == 7:
+			a = input("Geben Sie ein Datum ein: ")
+			print(Schaltjahr(a),"\n")
+		elif option == 8:
+			a = input("Geben Sie ein Datum a ein: ")
+			b = int(input("Geben Sie eine Zahl ein: "))
+			print(dateToStr(Summe(a,b)),"\n")
+		elif option == 9:
+			a = int(input("Geben Sie ein Jahr ein: "))
+			b = int(input("Geben Sie einen Monat ein: "))
+			print(TageImMonat(a,b),"\n")
+		elif option == 10:
+			a = int(input("Geben Sie ein Jahr ein: "))
+			print(TageImJahr(a),"\n")
+		elif option == 11:
+			a = input("Geben Sie ein Datum ein: ")
+			print(Wochentag(a,b),"\n")
+		elif option == 12:
+			a = int(input("Geben Sie ein Jahr ein: "))
+			print(dateToStr(Ostersonntag(a)),"\n")
 		elif option == 0:
 			noexit = False
 			print()
@@ -277,12 +307,8 @@ def manage_crop(crop):
 	
 def main():
 	
-	#Testinstanz anlegen
-	new_crop=Crop(1,4,3)
-	new_crop2=Crop(2,5,7)
-	
 
-	manage_crop(new_crop)
+	manage_date()
 
 if __name__ == "__main__":
 	main()
