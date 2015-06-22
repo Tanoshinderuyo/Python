@@ -49,7 +49,8 @@ def kalender(jahr):
     vBoxlayout = QVBoxLayout()
     table = QTableWidget()
     tableItem = QTableWidgetItem()
-    
+    #table.resizeColumnsToContents()
+    #table.resizeRowsToContents()
     # initiate table
     #table.setWindowTitle("QTableWidget Example @pythonspot.com")
     #table.resize(400, 275)

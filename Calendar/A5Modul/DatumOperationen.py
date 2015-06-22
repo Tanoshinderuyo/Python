@@ -1,11 +1,12 @@
+""""#===== DATUM - DATENTYP - FUNKTIONEN =================================#"""
+
 def toDate(eingabe):
 	datum=[0,0,0]
 	stringdatum=str(eingabe).split(".")
-	#datum=str(eingabe).split('.')[0]
 	for i in range(0, len(stringdatum),1):
 		datum[i]=int(stringdatum[i])
 	return datum
-	#'12.12.1222'
+	
 	
 def dateToStr(datum):
 	#Für die SUMMEN-Funktion
@@ -13,6 +14,8 @@ def dateToStr(datum):
 	return a
 	
 
+	
+""""#===== DATUM - OPERATIONEN - FUNKTIONEN ==============================#"""
 
 def Abstand(a, b):
 	datum1=toDate(a)
@@ -55,21 +58,22 @@ def Abstand(a, b):
 	return anzahl
 		
 	#//longint
+
+""" 	Existenz-Funktion
+	* Monat zwischen 1 und 12?
+	* Tage in Range des Monats des Jahres?
+	* Jahr darf negativ sein
 	
+	* Return Boolean"""	
 def Existenz(a):
 	datum=toDate(a)
-	#if(datum[2]>0):#eingefügt - Jahr > 0, aber nicht zwingend ein muss.
 	if(datum[1]>=1 and datum[1]<=12):
 		if(datum[0]>=1 and datum[0]<=TageImMonat(datum[2],datum[1])):
 			return True
-	#else:
 	else:
 		return False
-	#jahr nicht negativ
-	#-->monat 1-12
-	#-->tage maximal in range von tageimmonat[monat]
-	#//Boolean
-	
+
+		
 def IstGleich(a, b):
 	datum1=toDate(a)
 	datum2=toDate(b)
@@ -137,7 +141,7 @@ def Nachfolger(a):
 
 	
 #Prüft, ob ein Jahr ein Schaltjahr ist
-def schaltjahr(jahr): #Bem.: ':' eröffnet "alles" (Schleifen, Funktionen, ...) [wie geschweifte Klammern in Java]
+def Schaltjahr(jahr): #Bem.: ':' eröffnet "alles" (Schleifen, Funktionen, ...) [wie geschweifte Klammern in Java]
     if(jahr%400==0 or (jahr%4==0 and jahr%100!=0)):
         return 1
     else: return 0
@@ -180,16 +184,16 @@ def Wochentag(a):
 	mkzs = [5,1,2,5,0,3,5,1,4,6,2,4]
 	#Liste der Monatskennzahlen MIT Schaltjahr
     
-	c = datum[2]//100; 
+	c = int(datum[2])//100; 
 	#Anzahl der vergangenen Jahrhunderte
-	j = datum[2]%100; 
+	j = int(datum[2])%100; 
 	#Jahreszahl innerhalb eines Jahrhunderts
     
-	if (schaltjahr(datum[2])==1): 
-		k = mkzs[datum[1]]
+	if (Schaltjahr(datum[2])==1): 
+		k = mkzs[datum[1]-1]
 	else: 
-		k = mkz[datum[1]]
-	d=(datum[0] + k + j + j//4 - 2 * (c%4) )%7 
+		k = mkz[datum[1]-1]
+	d=(int(datum[0]) + k + j + j//4 - 2 * (c%4) )%7
 	return d
 
 	#//modimidofrsaso
@@ -282,33 +286,41 @@ def manage_date():
 		option = get_menu_choice()
 		print()
 		if option == 1:
-			print("Geben Sie Datum a ein: ")
+			print("Geben Sie Datum a ein: ", end="")
 			a = existant_input()
-			print("Geben Sie Datum b ein: ")
+			print("Geben Sie Datum b ein: ", end="")
 			b = existant_input()
 			print(Abstand(a,b),"\n")
 		elif option == 2:
-			a = input("Geben Sie ein Datum ein: ")
+			print("Geben Sie ein Datum ein: ", end="")
+			a = existant_input()
 			print(Existenz(a),"\n")
 		elif option == 3:
-			a = input("Geben Sie ein Datum a ein: ")
-			b = input("Geben Sie ein Datum b ein: ")
+			print("Geben Sie ein Datum a ein: ", end="")
+			a = existant_input()
+			print("Geben Sie ein Datum b ein: ", end="")
+			b = existant_input()
 			print(IstGleich(a,b),"\n")
 		elif option == 4:
-			a = input("Geben Sie ein Datum a ein: ")
-			b = input("Geben Sie ein Datum b ein: ")
+			print("Geben Sie ein Datum a ein: ", end="")
+			a = existant_input()
+			print("Geben Sie ein Datum b ein: ", end="")
+			b = existant_input()
 			print(LiegtVor(a,b),"\n")
 		elif option == 5:
-			a = input("Geben Sie ein Datum ein: ")
+			print("Geben Sie ein Datum ein: ", end="")
+			a = existant_input()
 			print(dateToStr(Vorgaenger(a)),"\n")
 		elif option == 6:
-			a = input("Geben Sie ein Datum ein: ")
+			print("Geben Sie ein Datum ein: ", end="")
+			a = existant_input()
 			print(dateToStr(Nachfolger(a)),"\n")
 		elif option == 7:
-			a = input("Geben Sie ein Datum ein: ")
+			a = int(input("Geben Sie ein Jahr ein: "))
 			print(Schaltjahr(a),"\n")
 		elif option == 8:
-			a = input("Geben Sie ein Datum a ein: ")
+			print("Geben Sie ein Datum a ein: ", end="")
+			a = existant_input()
 			b = int(input("Geben Sie eine Zahl ein: "))
 			print(dateToStr(Summe(a,b)),"\n")
 		elif option == 9:
@@ -319,8 +331,9 @@ def manage_date():
 			a = int(input("Geben Sie ein Jahr ein: "))
 			print(TageImJahr(a),"\n")
 		elif option == 11:
-			a = input("Geben Sie ein Datum ein: ")
-			print(Wochentag(a,b),"\n")
+			print("Geben Sie ein Datum ein: ", end="")
+			a = existant_input()
+			print(Wochentag(a),"\n")
 		elif option == 12:
 			a = int(input("Geben Sie ein Jahr ein: "))
 			print(dateToStr(Ostersonntag(a)),"\n")
