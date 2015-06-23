@@ -28,9 +28,9 @@ def wochentag(jahr,monat,tag):
     j = jahr%100; # Jahreszahl innerhalb eines Jahrhunderts
     
     if (schaltjahr(jahr)==1): 
-        k = mkzs[monat]
+        k = mkzs[monat-1]
     else: 
-        k = mkz[monat]
+        k = mkz[monat-1]
     #d = tag + k + j + j//4 - 2 * (c%4) 
     return (tag + k + j + j//4 - 2 * (c%4) )%7 
 

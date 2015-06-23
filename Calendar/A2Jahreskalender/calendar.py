@@ -50,7 +50,8 @@ def kalender(jahr):
         if (w!=1):
             if(w!=0):
                 ###print('\t'*(w-1)+'1',end='')
-                for i in range(0,w-1,1):
+			#hier noch einmal die empty-labels durchgucken, es müssen mehr gedruckt werden
+                for i in range(0,w+1,1):
                     Label(text='',width=15, relief=GROOVE).grid(row=reihe, column=i)
                 Label(text='1',width=15, relief=GROOVE).grid(row=reihe, column=w-1)
             else:

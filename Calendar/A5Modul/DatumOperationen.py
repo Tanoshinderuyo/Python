@@ -1,5 +1,10 @@
-""""#===== DATUM - DATENTYP - FUNKTIONEN =================================#"""
+""""====== DATUM - DATENTYP - FUNKTIONEN =================================="""
 
+""" 	toDate-Funktion
+	* Wandelt eine input() Eingabe von String in ein Integer-Array um
+	* datum = [Tag, Monat, Jahr]
+	
+	* Return Int-Array"""
 def toDate(eingabe):
 	datum=[0,0,0]
 	stringdatum=str(eingabe).split(".")
@@ -7,7 +12,11 @@ def toDate(eingabe):
 		datum[i]=int(stringdatum[i])
 	return datum
 	
+""" 	dateToStr-Funktion
+	* Wandlung des Int-Arrays in einen Datums-String
+	* datum = "Tag.Monat.Jahr"
 	
+	* Return String"""
 def dateToStr(datum):
 	#Für die SUMMEN-Funktion
 	a=str(datum[0])+'.'+str(datum[1])+'.'+str(datum[2])
@@ -15,8 +24,16 @@ def dateToStr(datum):
 	
 
 	
-""""#===== DATUM - OPERATIONEN - FUNKTIONEN ==============================#"""
+""""====== DATUM - OPERATIONEN - FUNKTIONEN ==============================="""
 
+""" 	Abstand-Funktion
+	* Unterscheidung a liegt vor b oder umgekehrt
+	* Jahresunterschied feststellen
+	* Monatsunterschied feststellen
+	* Tagesunterschied feststellen
+	* Aufsummieren
+	
+	* Return Integer"""
 def Abstand(a, b):
 	datum1=toDate(a)
 	datum2=toDate(b)
@@ -56,8 +73,6 @@ def Abstand(a, b):
 		else:
 			anzahl=datum1[0]-datum2[0]
 	return anzahl
-		
-	#//longint
 
 """ 	Existenz-Funktion
 	* Monat zwischen 1 und 12?
@@ -73,7 +88,11 @@ def Existenz(a):
 	else:
 		return False
 
-		
+""" 	IstGleich-Funktion
+	* Array - Wertevergleich auf Gleichheit
+	* AND - Verknüpfung
+	
+	* Return Boolean"""		
 def IstGleich(a, b):
 	datum1=toDate(a)
 	datum2=toDate(b)
@@ -82,7 +101,10 @@ def IstGleich(a, b):
 	else:
 		return False
 		
+""" 	LiegtVor-Funktion
+	* Vergleich Jahresweise, Monatsweise, Tagweise
 	
+	* Return Boolean"""	
 def LiegtVor(a, b):
 	#//Boolean
 	datum1=toDate(a)
@@ -97,14 +119,19 @@ def LiegtVor(a, b):
 		return False
 	else:
 		return datum1[0]<datum2[0]
+
+""" 	Vorgaenger-Funktion
+	* Sonderfälle: 01.01.X, Monatsanfänge
+	* Fall 1 - Jahresanfang
+	* Fall 2 - Monatsanfang
+	* Sonst - Ziehe vom Tag 1 ab
 	
+	* Return String"""		
 def Vorgaenger(a):
 	datum=toDate(a)
 	vorgaenger=[0,0,0]
-	#01.01.
-	#monatsanfang
 	if(datum[0]==1 and datum[1]==1):
-		vorgaenger[0]=TageImMonat((datum[2]-1),12)
+		vorgaenger[0]=TageImMonat((datum[2]-1),12) #31
 		vorgaenger[1]=12
 		vorgaenger[2]=datum[2]-1
 	elif(datum[0]==1 and datum[1]>1):
@@ -115,8 +142,15 @@ def Vorgaenger(a):
 		vorgaenger[0]=datum[0]-1
 		vorgaenger[1]=datum[1]
 		vorgaenger[2]=datum[2]
-	return vorgaenger
+	return dateToStr(vorgaenger)
+
+""" 	Nachfolger-Funktion
+	* Sonderfälle: Jahresletzte, Monatsletzte
+	* Fall 1 - Tag ist kleiner als Monatsmax - Tag + 1
+	* Fall 2 - Monatsletzter der Monate 1-11
+	* Fall 3 - Jahresletzter
 	
+	* Return String"""	
 def Nachfolger(a):
 	datum=toDate(a)
 	nachfolger=[0,0,0]
@@ -132,51 +166,66 @@ def Nachfolger(a):
 		nachfolger[2]=datum[2]+1
 		nachfolger[1]=1
 		nachfolger[0]=1
-	return nachfolger
-	
-	#//datum
-	#//nicht Monatsletzter
-	#//31. Dezember
-	#//nicht 31. Dezember
+	return dateToStr(nachfolger)
 
+""" 	Schaltjahr-Funktion
+	* Allgemeine Schaltjahr-Formel
 	
-#Prüft, ob ein Jahr ein Schaltjahr ist
-def Schaltjahr(jahr): #Bem.: ':' eröffnet "alles" (Schleifen, Funktionen, ...) [wie geschweifte Klammern in Java]
+	* Return Integer"""
+def Schaltjahr(jahr):
     if(jahr%400==0 or (jahr%4==0 and jahr%100!=0)):
         return 1
     else: return 0
 
+""" 	Summe-Funktion
+	* Unterscheidung zwischen Positiv, Negativ und 0
+	* Positiv - anzahl oft Nachfolgerbildung
+	* Negativ - anzahl oft Vorgaengerbildung
+	* 0 Nichts passiert
 	
+	* Return String"""	
 def Summe(a, anzahl):
-	if(anzahl>0):
+	if(anzahl > 0):
 		for z in range (1, anzahl+1,1):
-			#datum=Nachfolger(a)
-			a=dateToStr(Nachfolger(a))
-	elif(anzahl<0):
+			a = Nachfolger(a)
+	elif(anzahl < 0):
 		for z in range(1, -anzahl+1,1):
-			#datum=Vorgaenger(a)
-			a=dateToStr(Vorgaenger(a))
-	elif(anzahl==0):
-		return toDate(a)
-	ergebnis=toDate(a)
-	#//ermittelt das #anzahl 
-	#//folgende Datum anhand Nachfolger
+			a = Vorgaenger(a)
+	elif(anzahl == 0):
+		return a
+	ergebnis = a
 	return ergebnis
+
+""" 	TageImMonat-Funktion
+	* Abgleich mit Arrays der 31-, 30-Tage-Monate
+	* Abgleich mit Februar mit oder ohne Schaltjahr
+	* Ohne Fehlerabfang wäre jeder andere Monat außerhalb 1-12 28-tägig
 	
+	* Return Integer"""
 def TageImMonat(jahr, monat):
     if(monat in [1,3,5,7,8,10,12]):
         return 31
-    elif (monat in [4,6,9,11]): #=else if
+    elif (monat in [4,6,9,11]):
         return 30
-    elif(monat in [2] and schaltjahr(jahr)==1):
+    elif(monat in [2] and Schaltjahr(jahr)==1):
         return 29
     else: return 28 
+
+""" 	TageImJahr-Funktion
+	* Schaltjahr oder nicht Schaltjahr ist die Devise
 	
+	* Return Integer"""
 def TageImJahr(jahr):
-	if(schaltjahr(jahr)):
+	if(Schaltjahr(jahr)):
 		return 366
 	return 365
+
+""" 	Wochentag-Funktion
+	* Kalenderformel von Jacobsthal
+	* Monatskennzahlen mit und ohne Schaltjahr
+	* Formelberechnung auf Basis der Kennzahlen
 	
+	* Return Integer"""	
 def Wochentag(a):
 	datum=toDate(a)
 	mkz  = [6,2,2,5,0,3,5,1,4,6,2,4]
@@ -196,8 +245,10 @@ def Wochentag(a):
 	d=(int(datum[0]) + k + j + j//4 - 2 * (c%4) )%7
 	return d
 
-	#//modimidofrsaso
+""" 	Ostersonntag-Funktion
+	* Carl Friedrich Gauß - Algorithmus
 	
+	* Return String"""	
 def Ostersonntag(jahr):
 	ostern=[0,0,jahr]
 	k = jahr//100
@@ -210,36 +261,42 @@ def Ostersonntag(jahr):
 	sz = 7 - (jahr + jahr//4 + s) % 7
 	oe = 7 - (og - sz) % 7
 	os = og + oe
-	if (os>=1 and os<=31):
-		ostern[0]=os
-		ostern[1]=3
-		#result=[[3,os,'Ostersonntag']]
+	if (os >= 1 and os <= 31):
+		ostern[0] = os
+		ostern[1] = 3
 	else: 
-		#result=[[4,(os-31),'Ostersonntag']]
-		ostern[0]=os-31
-		ostern[1]=4
-	return ostern
-	#Datum
+		ostern[0] = os-31
+		ostern[1] = 4
+	return dateToStr(ostern)
 	
-#TESTUMGEBUNG=========================================================================#
+""""===================== TESTUMGEBUNG ==============================="""
+
+""" 	display-Funktion
+	* Erzeugt die Standardausgabe für die Auswahl
+	
+	* Printlines"""
 def display_menu():
-	print("1. Abstand")
-	print("2. Existenz")
-	print("3. IstGleich")
-	print("4. LiegtVor")
-	print("5. Vorgänger")
-	print("6. Nachfolger")
-	print("7. Schaltjahr")
-	print("8. Summe - Nachfolger X")
-	print("9. Tage im Monat")
-	print("10. Tage im Jahr")
-	print("11. Wochentag")
-	print("12. Ostersonntag")
-	print("0. Verlassen")
+	print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+	print("1.  Abstand (a,b)")
+	print("2.  Existenz(a)")
+	print("3.  IstGleich(a,b)")
+	print("4.  LiegtVor(a,b)")
+	print("5.  Vorgänger(a)")
+	print("6.  Nachfolger(a)")
+	print("7.  Schaltjahr(jahr)")
+	print("8.  Summe(a, anzahl)")
+	print("9.  Tage im Monat(jahr,monat)")
+	print("10. Tage im Jahr(jahr)")
+	print("11. Wochentag(a)")
+	print("12. Ostersonntag(jahr)")
+	print("0.  Verlassen")
 	print()
 	print("Bitte wählen Sie eine Option")
 	
-
+""" 	menu_choice-Funktion
+	* Kontrolliert die Eingabe auf Werte von 1-12 entsprechend dem Menü
+	
+	* Return Integer"""
 def get_menu_choice():
 	option_valid = False
 	while not option_valid:
@@ -253,7 +310,13 @@ def get_menu_choice():
 			print("Bitte einen gültigen Wert eingeben")
 	return choice
 	
-
+""" 	existant_input-Funktion
+	* Input der DATEN
+	* Fehlerabfang für grundlegende Zeichen außer Ziffern und Punkt
+	* Prüfung ob Datum überhaupt gültig ist
+	* Prüfung ob letztes Zeichen kein Punkt ist
+	
+	* Return String"""
 def existant_input():
 	option_valid = False
 	while not option_valid:
@@ -267,7 +330,8 @@ def existant_input():
 						punktcount += 1
 					count += 1
 				else:
-					print("Bitte ein gültiges Datum eingeben")
+					#print("Bitte ein gültiges Datum eingeben")
+					raise ValueError
 			if (punktcount == 2 and (ord(inputty[(len(inputty)-1)])!= 46) and count == len(inputty) and Existenz(inputty)==True):
 				option_valid = True
 			else:
@@ -275,8 +339,56 @@ def existant_input():
 		except ValueError:
 			print("Bitte ein gültiges Datum eingeben")
 	return inputty
-	
 
+""" 	int_input-Funktion
+	* Input für Jahre und Anzahl 
+	* Fehlerabfang für grundlegende Zeichen außer Ziffern und Minus
+	* Minus existiert am Wortanfang und kein weiteres, oder gar kein Minus
+	
+	* Return Integer"""
+def int_input():
+	option_valid = False
+	while not option_valid:
+		try:
+			inputty = (input())
+			minuscount = 0
+			for char in inputty:
+				if (ord(char) in [45,48,49,50,51,52,53,54,55,56,57]):
+					if (ord(char)==45):
+						minuscount += 1
+				else:
+					#print("Bitte ein gültiges Datum eingeben")
+					raise ValueError
+			if ((ord(inputty[0])==45 and minuscount<2) or (ord(inputty[0])!=45 and minuscount==0)):
+				option_valid = True
+			else:
+				raise ValueError
+		except ValueError:
+			print("Bitte eine gültige Zahl (Jahr/Anzahl) eingeben")
+	return int(inputty)
+
+""" 	mon_input-Funktion
+	* Einfache Prüfung ob Monat eine Zahl zwischen 1 und 12 ist
+	
+	* Return Integer"""
+def mon_input():
+	option_valid = False
+	while not option_valid:
+		try:
+			inputty = int(input())
+			if (1 <= inputty <= 12):
+				option_valid = True
+			else:
+				print("Bitte einen gültigen Monat eingeben")
+		except ValueError:
+			print("Bitte einen gültigen Monat eingeben")
+	return int(inputty)
+			
+""" 	manage_date-Funktion
+	* Eigentliches Testprogramm
+	* Erhält die Wahl des Users und führt jeweilige Funktion aus
+	
+	* Return Printlines"""
 def manage_date():
 	print("DatumOperationen - Testprogramm")
 	print()
@@ -310,22 +422,26 @@ def manage_date():
 		elif option == 5:
 			print("Geben Sie ein Datum ein: ", end="")
 			a = existant_input()
-			print(dateToStr(Vorgaenger(a)),"\n")
+			print(Vorgaenger(a),"\n")
 		elif option == 6:
 			print("Geben Sie ein Datum ein: ", end="")
 			a = existant_input()
-			print(dateToStr(Nachfolger(a)),"\n")
+			print(Nachfolger(a),"\n")
 		elif option == 7:
-			a = int(input("Geben Sie ein Jahr ein: "))
+			print("Geben Sie ein Jahr ein: ", end="")
+			a = int_input()
 			print(Schaltjahr(a),"\n")
 		elif option == 8:
 			print("Geben Sie ein Datum a ein: ", end="")
 			a = existant_input()
-			b = int(input("Geben Sie eine Zahl ein: "))
-			print(dateToStr(Summe(a,b)),"\n")
+			print("Geben Sie eine Zahl ein: ", end="")
+			b = int_input()
+			print(Summe(a,b),"\n")
 		elif option == 9:
-			a = int(input("Geben Sie ein Jahr ein: "))
-			b = int(input("Geben Sie einen Monat ein: "))
+			print("Geben Sie ein Jahr ein: ", end="")
+			a = int_input()
+			print("Geben Sie einen Monat ein: ", end="")
+			b = mon_input()
 			print(TageImMonat(a,b),"\n")
 		elif option == 10:
 			a = int(input("Geben Sie ein Jahr ein: "))
@@ -335,17 +451,19 @@ def manage_date():
 			a = existant_input()
 			print(Wochentag(a),"\n")
 		elif option == 12:
-			a = int(input("Geben Sie ein Jahr ein: "))
-			print(dateToStr(Ostersonntag(a)),"\n")
+			print("Geben Sie ein Jahr ein: ", end="")
+			a = int_input()
+			print(Ostersonntag(a),"\n")
 		elif option == 0:
 			noexit = False
 			print()
 	print("Vielen Dank für die Benutzung der Testumgebung")
 	
-	
+""""====== MAIN - METHODE und AUFRUF MAIN METHODE durch Kompilierung==="""
+""" 	MAIN-METHODE
+	* Aufruf der manage_date() - Funktion zur Ausführung der Funktionen
+"""	
 def main():
-	
-
 	manage_date()
 
 if __name__ == "__main__":
