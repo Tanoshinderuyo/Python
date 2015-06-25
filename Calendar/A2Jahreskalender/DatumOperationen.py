@@ -106,6 +106,7 @@ def IstGleich(a, b):
 	
 	* Return Boolean"""	
 def LiegtVor(a, b):
+	#//Boolean
 	datum1=toDate(a)
 	datum2=toDate(b)
 	if(datum1[2]<datum2[2]):
