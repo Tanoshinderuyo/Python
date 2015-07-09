@@ -8,11 +8,11 @@ class Crop:
 		#Attribute
 		self._growth = 0
 		self._days_growing = 0
-		self._growth_rate=growth_rate
-		self._light_need=light_need
-		self._water_need=water_need
-		self._status="Seed"
-		self._type="Generic"
+		self._growth_rate = growth_rate
+		self._light_need = light_need
+		self._water_need = water_need
+		self._status = "Seed"
+		self._type = "Generic"
 	
 	#Dictionary mit Water und Light - Needs
 	def needs(self):
@@ -25,7 +25,7 @@ class Crop:
 	#Update Status 
 	def _update_status(self):
 		if self._growth > 15:
-			self._status="Old"
+			self._status = "Old"
 		elif self._growth > 10:
 			self._status = "Mature"
 		elif self._growth > 5:
@@ -62,7 +62,7 @@ def manual_grow(crop):
 		try:
 			light = int(input("Please enter Light Value between 1-10: "))
 			if 1 <= light <=10:
-				valid=True
+				valid = True
 			#DER ELSE ZWEIG HIER WIRD NIE VERWENDET, da Automatisch der ValueError abfängt
 			else:
 				print("No Valid Value, please enter between 1-10")
@@ -74,7 +74,7 @@ def manual_grow(crop):
 		try:
 			water = int(input("Please enter Water Value between 1-10: "))
 			if 1 <= water <=10:
-					valid=True
+					valid = True
 			else:
 				print("No Valid Value, please enter between 1-10")
 		except ValueError:
@@ -84,6 +84,7 @@ def manual_grow(crop):
 	crop.grow(light, water)
 
 
+#ALLGEMEIN NUR FÜR TESTZWECKE
 
 def display_menu():
 	print("1. Grow manually over 1 day")
@@ -130,7 +131,7 @@ def manage_crop(crop):
 			print()
 	print("Thank you for using the crop management program")
 	
-	
+"""	
 def main():
 	
 	#Testinstanz anlegen
@@ -155,4 +156,4 @@ def main():
 
 if __name__ == "__main__":
 	main()
-	
+"""
