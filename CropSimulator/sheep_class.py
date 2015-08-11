@@ -11,10 +11,10 @@ class Sheep(Animal):
     """A lil Cow Animal """
     
     #constructor
-    def __init__(self):
+    def __init__(self,name):
         #call the super/parent class constructor with default values for cows
         #growth rate = 1; food need = 3; water need = 6
-        super().__init__(1,3,6)
+        super().__init__(1,3,6,name)
         self._type = "Sheep"
 
     #override the grow method -- the Sheep likes more water than food ofc .. ^^

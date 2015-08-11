@@ -9,7 +9,7 @@ import random
 class Animal:
     
     #konstruktor
-    def __init__(self, growth_rate, food_need, water_need):
+    def __init__(self, growth_rate, food_need, water_need, name):
         #Attribute
         self._weight = 0
         self._days_growing = 0
@@ -18,7 +18,7 @@ class Animal:
         self._water_need = water_need
         self._status = "Seed"
         self._type = "Generic"
-        self._name = " "
+        self._name = name
         
         #Dictionary mit Food und Light - Needs
     def needs(self):
