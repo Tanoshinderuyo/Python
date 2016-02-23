@@ -14,9 +14,9 @@ def kalender(jahr):
      # Erzeugung Tabelle
      #============================================
     
-    for monat in range(0,12,1): #range(<Start>,<Ende>,>Schritt>) > Endwerte, die genau getroffen werden, werden nicht ausgegeben
+    for monat in range(1,13,1): #range(<Start>,<Ende>,>Schritt>) > Endwerte, die genau getroffen werden, werden nicht ausgegeben
         #header Monatsname + Tagliste
-        print(monatsname[monat]) #default: print(monatsname[monat],end='\n') 
+        print(monatsname[monat-1]) #default: print(monatsname[monat],end='\n') 
         for tag in range(1,8,1):
             print(tagname[tag%7],end='\t')#if the Buffer doesn't work, add: ",flush=True"
         print(end='\n')
@@ -37,7 +37,7 @@ def kalender(jahr):
             
         #schreibt die konsekutiven Wochentage  
         zaehler = 2
-        for tag in range(2,monatlang+1,1): # Frage: was ist schneller? range(1,calfunctions.monatslaenge(monat))
+        for tag in range(2,monatlang,1): # Frage: was ist schneller? range(1,calfunctions.monatslaenge(monat))
             w+=1
             if(w%7==0): 
                 print('\t'+str(zaehler),end='\n')
@@ -53,24 +53,5 @@ def kalender(jahr):
     for counter in range(0,len(feiertag),1):        
         print(feiertag[counter][2]+':\t'+str(feiertag[counter][1])+'. '+str(monatsname[feiertag[counter][0]-1]))
     
-        
-    
-"""
-from tkinter import *
-fenster=Tk()
 
-fenster.title("Hallo Welt")
-fenster.geometry("600x1000")
-
-nachricht[]=Message(fenster, text=ausgabe)
-nachricht[].config(font=('times',8,'italic'))
-nachricht[].pack()
-
-ausgabe=[kalender(2015)]
-print(ausgabe)
-print(str(ausgabe))
-#w=Label(fenster, text=str(ausgabe))
-#w.pack()
-fenster.mainloop()
-"""
 

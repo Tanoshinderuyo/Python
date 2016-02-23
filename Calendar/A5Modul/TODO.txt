@@ -1,0 +1,8 @@
+Calfunctions:
+
+		Wochentag(jahr, monat, tag) funktioniert nicht
+		mkz[monat] muss mkz[monat-1] sein, da Array von 0 an zählt.
+
+		--> aber dann funktioniert Kalender nicht mehr :D
+
+DatumOperationen	geändert.
